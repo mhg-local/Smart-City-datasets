@@ -3,8 +3,10 @@ import json
 import os
 import matplotlib.pyplot as plt
 import numpy
+import numpy as np
+import pandas as pd
 import reverse_geocoder as rg
-import pprint
+import datetime
 
 from dateutil.parser import parse
 
@@ -48,6 +50,8 @@ class ReadContent():
 
             # creating address for the new CSV file to be written
             self.writeNewCSVFile(self.header, self.rows)
+
+        # elif fileAddress.split('.')[-1].lower() == "ttl":
 
     def getFirstRow(self):
         return self.rows[0]
@@ -173,13 +177,82 @@ class ReadContent():
         plt.show()
 
     @staticmethod
-    def reverseGeocode(self, coordinates):
-        result = rg.search(coordinates)
+    def reverseGeocode(long, lat):
+        coordinates = (long, lat)
+        print(rg.search(coordinates), "\n")
 
-        # result is a list containing ordered dictionary.
-        pprint.pprint(result)
+    @staticmethod
+    def plotLineChart(firstFile, secondFile, *yLabels):
+        files = []
+        plotDict = dict()
 
-        # coordinates = (56.23172069428216, 10.104986076057457)
-        # reverseGeocode(coordinates)
-        # print(rg.search(coordinates))
+        for file in [firstFile, secondFile]:
+            if '\\' not in file:
+                my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/" + file
+                files.append(my_path)
+            elif '\\' in file:
+                files.append(file)
 
+        for file in files:
+            rows = []
+            fh = open(file)
+            csvReader = csv.reader(fh)
+
+            # generates headers and rows lists
+            header = next(csvReader)
+            for row in csvReader:
+                rows.append(row)
+            for item in header:
+                header[header.index(item)] = item.lower()
+            timeStampIndex = header.index("timestamp")
+
+            for item in yLabels:
+                if item.lower() in header:
+                    rowIndex = header.index(item.lower())
+                    timeStamps = []
+                    for row in rows:
+                        plotDict[row[timeStampIndex]] = row[rowIndex]
+                        timeStamps.append(row[timeStampIndex])
+
+                    Xs = []
+                    Ys = []
+
+                    for elem in plotDict:
+                        Xs.append(elem)
+                        Ys.append(int(plotDict[elem]))
+
+                    const = float(100 / len(Xs))
+                    temp = 0
+
+                    for x in Xs:
+                        Xs[Xs.index(x)] = temp * const
+                        temp += 1
+                    plotDict.clear()
+
+                    plt.figure(figsize=(15, 9))
+                    plt.plot(Xs, Ys)
+                    plt.title(file)
+                    plt.xlabel("time")
+                    plt.ylabel(item)
+                    a = []
+                    b = []
+                    for i in range(0, 100, 10):
+                        a.append(i)
+                        b.append(timeStamps[int(len(timeStamps) * i / 100)])
+                    plt.xticks(a, b, rotation=45)
+
+                    plt.show()
+
+        # for item in xValues:
+        #     if 'T' not in item:
+        #         temp = item.split(' ')
+        #         xValues[xValues.index(item)] = temp[0] + 'T' + temp[1]
+        #
+        # dates = [datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S") for ts in xValues]
+        # dates.sort()
+        # sortedDates = ([datetime.datetime.strftime(ts, "%Y-%m-%dT%H:%M:%S") for ts in dates])
+        # for item in sortedDates:
+        #     finalXValues.append(item)
+        # finalXValues = list(dict.fromkeys(finalXValues))
+
+            fh.close()

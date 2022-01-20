@@ -17,16 +17,17 @@ for file in glob.glob(path):
 
         rulesAndFilters = RulesAndFilters(file)
 
-        # rulesAndFilters.removeDuplicateRowsFromCSV()
-        rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
+        # rulesAndFilters.removeDuplicateRowsFromCSV()  # To remove duplication
+        # rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")  # to check validity of the values
         rulesAndFilters.setValueRange("avgSpeed", 60, condition="smaller than")
-        rulesAndFilters.checkTypeOfValue("avgSpeed", int)
-        rulesAndFilters.removeInvalidTimeStamps()
-        rulesAndFilters.removeTimeStampsNotDividableBy5()
+        rulesAndFilters.checkTypeOfValue("avgSpeed", int)  # to check type of values
+        rulesAndFilters.removeInvalidTimeStamps()  # check type and format
+        rulesAndFilters.removeTimeStampsNotDividableBy5()   # to formalized th received timestamp
 
         readContent = ReadContent(file)
+        # readContent.plotFromCSV()   # to draw a plot per each CSV
 
-        # readContent.plotFromCSV()
+
         # print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))
         # print("min is : ", readContent.getMinValueOfColumn("avgSpeed"))
         # print("max is : ", readContent.getMaxValueOfColumn("avgSpeed"))
@@ -34,3 +35,5 @@ for file in glob.glob(path):
         print("last row is : ", readContent.getLastRow())
         print("headers are : ", readContent.getHeaders())
         print("number of rows is : ", readContent.getSize(), "\n")
+
+ReadContent.plotLineChart("pollutionData158324.csv", "trafficData158324.csv", "carbon_monoxide", "vehicleCount")
