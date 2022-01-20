@@ -1,1 +1,1 @@
-# Applying ETL to Smart City Datasets
+# Analyzing Smart City Datasets
