@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# CSV-Modificator
+
+# Smart City datasets
 ### A brief explanation about each method and its arguments <br/> <br/>
 
 ------------------------------------------------------
