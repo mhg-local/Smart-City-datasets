@@ -3,6 +3,41 @@
 ### A brief explanation about each method and its arguments <br/> <br/>
 
 ------------------------------------------------------
+**getFirstRow/getLastRow method :<br/>**
+Calling this classmethod on CSV files will return the first/last row of the dataset
+
+
+------------------------------------------------------
+**getSize method :<br/>**
+Calling this classmethod on CSV files will return the size of datasets
+------------------------------------------------------
+**getFileFormat and writeNewCSVFile method :<br/>**
+Calling this classmethod on CSV files will check the file format of datasets and convert to CSV if it is in txt format (maily used in Weather datasets)
+
+
+------------------------------------------------------
+**isValidDate method :<br/>**
+Calling this classmethod on CSV files will check validity of the date format
+
+
+------------------------------------------------------
+**getMaxValueOfColumn/getMinValueOfColumn method :<br/>**
+Calling this classmethod on CSV files will return max/min of selected column in the observation
+
+------------------------------------------------------
+**getMaxValueOfColumn/ getMinValueOfColumn/ getAvgValueOfColumn method :<br/>**
+Calling this classmethod on CSV files will return max/min/avrage of selected column in the observation
+------------------------------------------------------
+**checkTypeOfVariable method :<br/>**
+Calling this classmethod on CSV files will check type of observation and remove the raw with the given wrong value
+------------------------------------------------------
+**plotFromCSV method :<br/>**
+Calling this classmethod on CSV files will draw a bar char per sensor observation
+------------------------------------------------------
+**plotLineChart method :<br/>**
+Calling this classmethod on CSV files will line chart per sensor observation and selected variable/column
+------------------------------------------------------
+
 **createFormattedAddressColumn method :<br/>**
 <img src="README_Docs/method call_createFormattedAddressColumn.png" width="250">
 <br/>
