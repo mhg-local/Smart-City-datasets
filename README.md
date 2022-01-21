@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CSV-Modificator
 ### A brief explanation about each method and its arguments <br/> <br/>
 
@@ -36,3 +37,6 @@ final .CSV file :
 <br/>
 <img src="README_Docs/removeRowsThatViolateAllConditions_final_csv.png" width="450">
 <br/> 
+=======
+# Analyzing Smart City Datasets
+>>>>>>> f61ce3734b1eae551e8787684009e71ddc29d728
