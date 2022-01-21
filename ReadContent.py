@@ -10,6 +10,8 @@ import datetime
 
 from dateutil.parser import parse
 
+from RetrieveAddress import RetrieveAddress
+
 
 class ReadContent():
     def __init__(self, fileAddress):
@@ -180,6 +182,29 @@ class ReadContent():
     def reverseGeocode(long, lat):
         coordinates = (long, lat)
         print(rg.search(coordinates), "\n")
+
+    def createFormattedAddressColumn(self):
+        locationHeaders = ["latitude", "longitude", "location", "address"]
+        indexesList = []
+        for item in locationHeaders:
+            if item.lower() in self.header:
+                indexesList.append(self.header.index(item))
+
+        retrieveAddress = RetrieveAddress()
+
+        if len(indexesList) == 0 or "Formatted Address" in self.header:
+            return
+        else:
+            self.header.append("Formatted Address")
+            address = ""
+            for row in self.rows:
+                for item in indexesList:
+                    address += " " + row[item]
+                row.append(retrieveAddress.getFormattedAddress(address))
+                address = ""
+
+        self.writeNewCSVFile(self.header, self.rows)
+
 
     @staticmethod
     def plotLineChart(firstFile, secondFile, *yLabels):
