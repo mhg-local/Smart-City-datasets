@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf9ee956-5866-41fb-b28a-ed285daa07e6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Addresses.sqlite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/SQLAddress.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/geolocation_finalCSV.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/geolocation_initialCSV.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/method call_createFormattedAddressColumn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/removeRowsThatViolateAllConditions_declaration.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/removeRowsThatViolateAllConditions_final_csv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/removeRowsThatViolateAllConditions_initial_csv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RetrieveAddress.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/aarhus_parking.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cultural_events_aarhus.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReadContent.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReadContent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RulesAndFilters.py" beforeDir="false" afterPath="$PROJECT_DIR$/RulesAndFilters.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input files/.~lock.trafficData158324.csv#" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/input files/pollutionData158324.csv" beforeDir="false" afterPath="$PROJECT_DIR$/input files/pollutionData158324.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input files/trafficData158324.csv" beforeDir="false" afterPath="$PROJECT_DIR$/input files/trafficData158324.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/trafficData158324.csv" beforeDir="false" afterPath="$PROJECT_DIR$/trafficData158324.csv" afterDir="false" />
     </list>

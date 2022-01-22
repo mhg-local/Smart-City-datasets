@@ -5,7 +5,8 @@ from ReadContent import ReadContent
 from RulesAndFilters import RulesAndFilters
 
 my_path = os.path.abspath(os.path.dirname(__file__))
-path = os.path.join(my_path, "input files/*")
+path = os.path.join(my_path, "Files/*")
+
 
 for file in glob.glob(path):
     if ReadContent.getFileFormat(file) == "txt":
@@ -16,18 +17,18 @@ for file in glob.glob(path):
         print("file is: ", file)
 
         rulesAndFilters = RulesAndFilters(file)
-        rulesAndFilters.removeRowsThatViolateAllConditions([{"header": "vehicleCount", "value": 0, "condition": "not equal"},
-                                    {"header": "avgSpeed", "value": 60, "condition": "smaller than"},
-                                    {"header": "sulfure_dioxide", "value": 60, "condition": "smaller than"}])
+        #rulesAndFilters.removeRowsThatViolateAllConditions([{"header": "vehicleCount", "value": 0, "condition": "not equal"},
+        #                           {"header": "avgSpeed", "value": 1, "condition": "smaller than"}])
 
         # rulesAndFilters.removeDuplicateRowsFromCSV()
-        # rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
+        rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
         # rulesAndFilters.setValueRange("avgSpeed", 60, condition="smaller than")
         # rulesAndFilters.checkTypeOfValue("avgSpeed", int)
         # rulesAndFilters.removeInvalidTimeStamps()
         # rulesAndFilters.removeTimeStampsNotDividableBy5()
 
         readContent = ReadContent(file)
+
         # readContent.createFormattedAddressColumn()
 
         # readContent.plotFromCSV()
@@ -37,6 +38,6 @@ for file in glob.glob(path):
         # print("first row is : ", readContent.getFirstRow())
         # print("last row is : ", readContent.getLastRow())
         # print("headers are : ", readContent.getHeaders())
-        # print("number of rows is : ", readContent.getSize(), "\n")
+        print("number of rows is : ", readContent.getSize(), "\n")
 
     # ReadContent.plotLineChart("pollutionData158324.csv", "trafficData158324.csv", "carbon_monoxide", "vehicleCount")
