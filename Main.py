@@ -17,11 +17,11 @@ for file in glob.glob(path):
         print("file is: ", file)
 
         rulesAndFilters = RulesAndFilters(file)
-        #rulesAndFilters.removeRowsThatViolateAllConditions([{"header": "vehicleCount", "value": 0, "condition": "not equal"},
-        #                           {"header": "avgSpeed", "value": 1, "condition": "smaller than"}])
+        rulesAndFilters.removeRowsThatViolateAllConditions([{"header": "vehicleCount", "value": 0, "condition": "not equal"},
+                                   {"header": "avgSpeed", "value": 1, "condition": "smaller than"}])
 
         # rulesAndFilters.removeDuplicateRowsFromCSV()
-        rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
+        # rulesAndFilters.setValueRange("vehicleCount", 0, condition="not equal")
         # rulesAndFilters.setValueRange("avgSpeed", 60, condition="smaller than")
         # rulesAndFilters.checkTypeOfValue("avgSpeed", int)
         # rulesAndFilters.removeInvalidTimeStamps()
@@ -29,7 +29,7 @@ for file in glob.glob(path):
 
         readContent = ReadContent(file)
 
-        # readContent.createFormattedAddressColumn()
+        readContent.createFormattedAddressColumn()
 
         # readContent.plotFromCSV()
         # print("Avg is : ", readContent.getAvgValueOfColumn("avgMeasuredTime"))

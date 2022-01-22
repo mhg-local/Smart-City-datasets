@@ -18,7 +18,7 @@ class RetrieveAddress:
             ''')
         conn.commit()
 
-    def getFormattedAddress(self, address, *addresses):
+    def getFormattedAddress(self, address, *addresses):  # convert coordination into human-readable format
 
         for item in addresses:
             address += " "

@@ -76,7 +76,7 @@ class ReadContent():
         if self.getFileFormat(self.fileAddress) == 'csv':
             pathToWriteCSV = self.fileAddress
         else:
-            my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/"
+            my_path = os.path.abspath(os.path.dirname(__file__)) + "/Files/"
             temp = self.fileAddress.split("/")[-1].split(".")[0] + ".csv"
             pathToWriteCSV = os.path.join(my_path, temp)
         with open(pathToWriteCSV, 'w') as file:
@@ -183,7 +183,7 @@ class ReadContent():
         coordinates = (long, lat)
         print(rg.search(coordinates), "\n")
 
-    def createFormattedAddressColumn(self):
+    def createFormattedAddressColumn(self):             # reverse geolocation
         locationHeaders = ["latitude", "longitude", "location", "address"]
         indexesList = []
         for item in locationHeaders:
@@ -207,13 +207,13 @@ class ReadContent():
 
 
     @staticmethod
-    def plotLineChart(firstFile, secondFile, *yLabels):
+    def plotLineChart(firstFile, secondFile, *yLabels):  # Line chart to compare two plots
         files = []
         plotDict = dict()
 
         for file in [firstFile, secondFile]:
             if '\\' not in file:
-                my_path = os.path.abspath(os.path.dirname(__file__)) + "/input files/" + file
+                my_path = os.path.abspath(os.path.dirname(__file__)) + "/Files/" + file
                 files.append(my_path)
             elif '\\' in file:
                 files.append(file)
