@@ -362,9 +362,6 @@ class ReadContent():
             fig, axs = plt.subplots(len(inputLists) + 1)
             indexSubPlot = 0
             for inputList in inputLists:
-                fileAddress = ''
-                # title = inputList[1]
-                fileName = ''
                 if '\\' not in inputList[0]:
                     title = inputList[0] + '\n' + inputList[1]
                     fileName = inputList[0]
@@ -393,13 +390,15 @@ class ReadContent():
                 finalXs = []
                 for i in range(0, len(x)):
                     finalXs.append(x[i])
+
                 for item in y:
                     try:
-                        finalYs.append(int(item))
+                        finalYs.append(float(item))
                     except:
                         continue
                 for item in finalXs:
                     finalXs[finalXs.index(item)] = parser.parse(item)
+
 
                 axs[indexSubPlot].plot(finalXs, finalYs, label=fileName)
                 plt.plot(finalXs, finalYs, label=title)
@@ -407,7 +406,6 @@ class ReadContent():
                 axs[indexSubPlot].legend(bbox_to_anchor=(0.97, 1), loc="upper left")
                 axs[indexSubPlot].set(xlabel="time stamp (Standard)")
                 axs[indexSubPlot].set_ylabel(title, rotation=0, labelpad=60)
-                # axs[indexSubPlot].tick_params(labelrotation=45)
 
                 indexSubPlot += 1
 

@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf9ee956-5866-41fb-b28a-ed285daa07e6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_1_plotCustomLineCharts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_2_plotCustomLineCharts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_2_plotLineChart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_3_plotCustomLineCharts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_4_plotCustomLineCharts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README_Docs/Figure_5_plotCustomLineCharts.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tempm.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReadContent.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReadContent.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
