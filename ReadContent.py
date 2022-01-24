@@ -7,6 +7,9 @@ import numpy as np
 import pandas as pd
 import reverse_geocoder as rg
 import datetime
+from datetime import datetime
+from dateutil import parser
+import matplotlib.dates as mdates
 
 from dateutil.parser import parse
 
@@ -140,7 +143,7 @@ class ReadContent():
         except:
             return False
 
-    def plotFromCSV(self, *args):
+    def plotFromBarChartForOneCSV(self, *args):
 
         intColumns = []
         if len(args) == 0:
@@ -183,7 +186,7 @@ class ReadContent():
         coordinates = (long, lat)
         print(rg.search(coordinates), "\n")
 
-    def createFormattedAddressColumn(self):             # reverse geolocation
+    def createFormattedAddressColumn(self):
         locationHeaders = ["latitude", "longitude", "location", "address"]
         indexesList = []
         for item in locationHeaders:
@@ -205,17 +208,18 @@ class ReadContent():
 
         self.writeNewCSVFile(self.header, self.rows)
 
-
     @staticmethod
-    def plotLineChart(firstFile, secondFile, *yLabels):  # Line chart to compare two plots
+    def plotLineChart(inputFiles, *yLabels):
         files = []
         plotDict = dict()
-
-        for file in [firstFile, secondFile]:
+        filename = ""
+        for file in inputFiles:
             if '\\' not in file:
+                filename = file
                 my_path = os.path.abspath(os.path.dirname(__file__)) + "/Files/" + file
                 files.append(my_path)
             elif '\\' in file:
+                filename = file.split('/')[-1]
                 files.append(file)
 
         for file in files:
@@ -256,7 +260,7 @@ class ReadContent():
 
                     plt.figure(figsize=(15, 9))
                     plt.plot(Xs, Ys)
-                    plt.title(file)
+                    plt.title(filename)
                     plt.xlabel("time")
                     plt.ylabel(item)
                     a = []
@@ -265,19 +269,153 @@ class ReadContent():
                         a.append(i)
                         b.append(timeStamps[int(len(timeStamps) * i / 100)])
                     plt.xticks(a, b, rotation=45)
-
                     plt.show()
-
-        # for item in xValues:
-        #     if 'T' not in item:
-        #         temp = item.split(' ')
-        #         xValues[xValues.index(item)] = temp[0] + 'T' + temp[1]
-        #
-        # dates = [datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S") for ts in xValues]
-        # dates.sort()
-        # sortedDates = ([datetime.datetime.strftime(ts, "%Y-%m-%dT%H:%M:%S") for ts in dates])
-        # for item in sortedDates:
-        #     finalXValues.append(item)
-        # finalXValues = list(dict.fromkeys(finalXValues))
-
+                    # return [Xs, Ys, a, b]
             fh.close()
+
+    @staticmethod
+    def plotOneLineChartFromMultipleFiles(filesList, headersList):
+        files = []
+        plotDict = dict()
+        timestamps = []
+        dateTimeFormat = "%Y-%m-%dT%H:%M:%S"
+
+        for file in filesList:
+            if '\\' not in file:
+                my_path = os.path.abspath(os.path.dirname(__file__)) + "/Files/" + file
+                files.append(my_path)
+            elif '\\' in file:
+                files.append(file)
+
+        allXs = []
+        allYs = []
+        for file in files:
+            rows = []
+            fh = open(file)
+            csvReader = csv.reader(fh)
+
+            # generates headers and rows lists
+            header = next(csvReader)
+            for item in header:
+                header[header.index(item)] = item.lower()
+            for row in csvReader:
+                rows.append(row)
+
+            if "timestamp" in header:
+                index = header.index("timestamp")
+                for row in rows:
+                    if 'T' not in row[index]:
+                        temp = row[index].split(' ')
+                        row[index] = temp[0] + 'T' + temp[1]
+                        timestamps.append(row[index])
+                    elif 'T' in row[index]:
+                        timestamps.append(row[index])
+            timestamps = list(dict.fromkeys(timestamps))
+            # dates = [datetime.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%S") for ts in timestamps]
+            # dates.sort()
+            # sortedDates = ([datetime.datetime.strftime(ts, "%Y-%m-%dT%H:%M:%S") for ts in dates])
+
+            for item in headersList:
+                item = item.lower()
+                if item in header and "timestamp" in header:
+                    tempXs = []
+                    tempYs = []
+                    for row in rows:
+                        if 'T' not in row[header.index('timestamp')]:
+                            temp = row[header.index('timestamp')].split(' ')
+                            row[header.index('timestamp')] = temp[0] + 'T' + temp[1]
+                            tempXs.append(row[header.index('timestamp')])
+                        elif 'T' in row[header.index('timestamp')]:
+                            tempXs.append(row[header.index('timestamp')])
+                        tempYs.append(row[header.index(item)])
+                    allXs.append(tempXs)
+                    allYs.append(tempYs)
+
+        plt.figure(figsize=(15, 9))
+        i = 0
+        for i in range(0, len(allXs)):
+            for item in allXs[i]:
+                allXs[i][allXs[i].index(item)] = timestamps.index(item)
+            # print(allXs)
+            for j in range(0, len(allYs[i])):
+                allYs[i][j] = float(allYs[i][j])
+                if not isinstance(allYs[i][j], float):
+                    print("error")
+            plt.plot(allXs[i], allYs[i])
+
+        plt.xlabel('x - axis')
+        plt.ylabel('y - axis')
+        # a = []
+        # b = []
+        # for i in range(0, 100, 10):
+        #     b.append(timestamps[int(len(timestamps) * i / 100)])
+        # plt.xticks(a, b, rotation=45)
+        plt.show()
+
+    @staticmethod
+    def plotCustomLineCharts(firstList, *otherLists, **kwargs):
+        if kwargs.get('format') == 'one by one':
+            inputLists = [firstList]
+            for item in otherLists:
+                inputLists.append(item)
+
+            fig, axs = plt.subplots(len(inputLists) + 1)
+            indexSubPlot = 0
+            for inputList in inputLists:
+                fileAddress = ''
+                # title = inputList[1]
+                fileName = ''
+                if '\\' not in inputList[0]:
+                    title = inputList[0] + '\n' + inputList[1]
+                    fileName = inputList[0]
+                    my_path = os.path.abspath(os.path.dirname(__file__)) + "/Files/" + inputList[0]
+                    fileAddress = my_path
+                elif '\\' in inputList[0]:
+                    title = inputList[0].split('/')[-1] + '\n' + inputList[1]
+                    fileName = inputList[0].split('/')[-1]
+                    fileAddress = inputList[0]
+                else:
+                    raise Exception("wrong file address format, address must be complete path to the file or full "
+                                    "file name in \" input \" folder")
+
+                fh = open(fileAddress)
+                csvReader = csv.reader(fh)
+                headers = next(csvReader)
+                for header in headers:
+                    headers[headers.index(header)] = header.lower()
+                df = pd.read_csv(fh, names=headers)
+                if inputList[1].lower() not in headers:
+                    raise Exception("there is no header", inputList[1], " in ", inputList[0], " please check inputs")
+
+                x = df['timestamp']
+                y = df[inputList[1].lower()]
+                finalYs = []
+                finalXs = []
+                for i in range(0, len(x)):
+                    finalXs.append(x[i])
+                for item in y:
+                    try:
+                        finalYs.append(int(item))
+                    except:
+                        continue
+                for item in finalXs:
+                    finalXs[finalXs.index(item)] = parser.parse(item)
+
+                axs[indexSubPlot].plot(finalXs, finalYs, label=fileName)
+                plt.plot(finalXs, finalYs, label=title)
+                axs[indexSubPlot].legend()
+                axs[indexSubPlot].legend(bbox_to_anchor=(0.97, 1), loc="upper left")
+                axs[indexSubPlot].set(xlabel="time stamp (Standard)")
+                axs[indexSubPlot].set_ylabel(title, rotation=0, labelpad=60)
+                # axs[indexSubPlot].tick_params(labelrotation=45)
+
+                indexSubPlot += 1
+
+            axs[-1].set(xlabel="time stamp (Standard)")
+            axs[-1].set_ylabel("all lines together", rotation=0, labelpad=60)
+            axs[-1].legend()
+            axs[-1].legend(bbox_to_anchor=(0.97, 1), loc="upper left")
+            # manager = plt.get_current_fig_manager()
+            # manager.full_screen_toggle()
+            plt.xticks(rotation=45)
+            plt.show()

@@ -47,8 +47,58 @@ Calling this classmethod on CSV files will draw a bar char per sensor observatio
 Calling this classmethod on CSV files will line chart per sensor observation and selected variable/column
 
 
-------------------------------------------------------
 
+------------------------------------------------------
+**plotLineChart method :<br/>**
+<img src="README_Docs/plotcustomlinechartscallfunction.png" width="600">
+<br/>
+Calling this staticmethod on CSV files will plot values of second argument (E.g. "carbon_monoxide") with regards to tiemstamps. First argument containing the CSV files names, can include multiple files or just one. In case multiple files gives, charts will be plotted separately. X axis which includes timestamps, is not a standard time line, but it is set based on the data available in the CSV fiel, in other words X axis only contains ticks which are in the CSV file and not based on a regular standard time line.
+<br/>
+**example 1** :
+<br/>
+<img src="README_Docs/Figure_1.png" width="900">
+
+**example 2** :
+<br/>
+<img src="README_Docs/Figure_2_plotLineChart.png" width="900">
+<br/>
+
+------------------------------------------------------
+**plotCustomLineCharts method :<br/>**
+<br/>
+Arguments if this staticmethod are lists which contain full address or just the name of the file as first element and the column header to be plotted as second element of the list. X axises are regular standard time lines and x axis ticks contain all timestamps even if they are not in the CSV file's rows. Examples are as follow:
+<br/>
+
+**example 1** : 
+<br/>
+<img src="README_Docs/example1 call.png" width="600">
+<br/>
+<img src="README_Docs/example1.png" width="900">
+
+**example 2** : 
+<br/>
+<img src="README_Docs/call1.png" width="600">
+<br/>
+<img src="README_Docs/Figure_4_plotCustomLineCharts.png" width="900">
+
+**example 3** :
+<br/>
+<img src="README_Docs/call2.png" width="600">
+<br/>
+<img src="README_Docs/Figure_2_plotCustomLineCharts.png" width="900">
+<br/>
+**example 4** :
+<br/>
+<img src="README_Docs/call3.png" width="450">
+<br/>
+<img src="README_Docs/Figure_5_plotCustomLineCharts.png" width="900">
+<br/>
+**example 5** :
+<br/>
+<img src="README_Docs/Figure_4_plotCustomLineCharts.png" width="900">
+<br/>
+
+------------------------------------------------------
 **createFormattedAddressColumn method :<br/>**
 <img src="README_Docs/method call_createFormattedAddressColumn.png" width="250">
 <br/>
